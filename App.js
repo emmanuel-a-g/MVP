@@ -1,61 +1,32 @@
 // import { StatusBar } from 'expo-status-bar';
 // import { useDeviceOrientation} from '@react-native-community/hooks';
 import React from 'react';
-import { StyleSheet, 
-  Platform, 
+import { 
+  StyleSheet, 
+  Platform,
   StatusBar, 
-  View } from 'react-native';
+  View } 
+  from 'react-native';
+import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
+import ChatScreen from './app/screens/ChatScreen.js';
+import WelcomeScreen from './app/screens/WelcomeScreen.js';
 
   export default function App() {
-  console.log('App executing, yes baby');
-
+  console.log('App executing sucessfully...');
 
   return (
-    <View style={{
-      paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-      backgroundColor: "white",
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: "center", //main acess
-      alignItems: "center",
-      alignContent: "center",
-      // flexWrap: "wrap"
-    }}>
-    <View style={{
-      backgroundColor:"dodgerblue",
-      width: 100,
-      height: 100,
-      // flex: 2
-    }}/>
-    <View style={{
-      backgroundColor:"gold",
-      height: 100,
-      width: 100,
-      top: 20,
-      left: 20,
-      position: "absolute",
+    <View style={styles.container}>
 
-    }}/>
-    <View style={{
-      backgroundColor:"tomato",
-      height: 100,
-      width: 100,
-      // flex: 1
-    }}/>
-
+    <ChatScreen />
+    
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  basetext : {
-    color: "white"
-  },
   container: {
     flex: 1,
-    backgroundColor: 'red',
-    // alignItems: 'center',
-    // justifyContent: 'center',
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    justifyContent: 'center',
   },
 });
