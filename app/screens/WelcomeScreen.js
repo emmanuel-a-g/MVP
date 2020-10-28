@@ -11,8 +11,7 @@ import {
 
  import AppButton from './AppButton';
 
-function WelcomeScreen(props) {
-  console.log('then.. getting to Welcome Screen');
+function WelcomeScreen({ navigation  }) { 
 
   return (
     <ImageBackground
@@ -26,8 +25,8 @@ function WelcomeScreen(props) {
     </View>
 
     <View style={styles.account}>
-    <AppButton title="Login" onTouch={() => console.log('I was logged in')} color={'black'}/>
-    <AppButton title="Register" onTouch={() => console.log('I was logged in')} color={'orange'}/>
+      <AppButton title="Login" onPress={() => navigation.navigate("Login")} color={'black'}/>
+      <AppButton title="Register" onPress={() => navigation.navigate("Register")} color={'#f5a25d'}/>
     </View>
 
     </ImageBackground>

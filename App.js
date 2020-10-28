@@ -1,24 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { 
-  StyleSheet, 
-  Platform,
-  StatusBar, 
-  View } 
+  StyleSheet,
+  Button,
+  View, 
+  Image,
+  Text} 
 from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
-import LoginScreen from './app/screens/LoginScreen';
-
-  export default function App() {
-  console.log('App running sucessfully...');
 
 
-  return (<LoginScreen />);
+import Screen from './app/components/Screen';
+import AuthNavigator from './app/navigation/AuthNavigator';
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <AuthNavigator/>
+    </NavigationContainer>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    justifyContent: 'center',
-  }
-});

@@ -9,7 +9,7 @@ function AppTextInput({ icon, ...otherProps }) {
     { icon && <MaterialCommunityIcons name={icon} size={20}
      color={colors.medium}
      style={styles.icon}/>}
-    <TextInput style={styles.textInput}
+    <TextInput style={styles.textInput} 
     {...otherProps}
     />
       
