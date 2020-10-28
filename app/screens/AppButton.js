@@ -3,22 +3,24 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 import colors from '../config/colors';
 
-function AppButton({title, onTouch, color}) {
+function AppButton({title, onPressing, color}) {
+  //color required!
+
   return (
-    <TouchableOpacity style={[styles.button, {backgroundColor: color}]} onPress={() => onTouch()}>
+    <TouchableOpacity style={[styles.button, {backgroundColor: color}]} onPress={onPressing}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>  
   );
 }
 const styles = StyleSheet.create({
   button : {
-    backgroundColor: "yellow",
+    // backgroundColor: "yellow",
     borderRadius: 25, 
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
     height: 50,
-    marginVertical: 8,
+    marginVertical: 10,
   }, 
   text : {
     color: colors.white,

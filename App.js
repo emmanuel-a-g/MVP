@@ -1,21 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { 
   StyleSheet, 
   Platform,
   StatusBar, 
   View } 
 from 'react-native';
-import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
-import ChatScreen from './app/screens/ChatScreen.js';
-import WelcomeScreen from './app/screens/WelcomeScreen.js';
-import AppButton from './app/screens/AppButton.js';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
+import LoginScreen from './app/screens/LoginScreen';
 
   export default function App() {
   console.log('App running sucessfully...');
 
-  return (
-    <WelcomeScreen />
-  );
+
+  return (<LoginScreen />);
 }
 
 const styles = StyleSheet.create({
