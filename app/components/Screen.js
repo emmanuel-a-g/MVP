@@ -14,7 +14,7 @@ export default Screen;
 
 const styles = StyleSheet.create({
   screen : {
-    paddingTop : Contants.statusBarHeight,
     flex: 1,
+    paddingTop : Contants.statusBarHeight,
   }
 })

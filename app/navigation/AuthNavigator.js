@@ -9,13 +9,18 @@ import Screen from '../components/Screen';
 
 const Stack = createStackNavigator();
 
-const AuthNavigator = ({navigation}) => (
-  <Stack.Navigator initialRouteName="Welcome">
-    <Stack.Screen options={{headerTitleStyle: {alignSelf: "center"}}} 
-      name="Welcome" component={WelcomeScreen}/>
-    <Stack.Screen options={{headerTitleStyle: {alignSelf: "center"}}}
-    name="Login" component={LoginScreen}/>
+const AuthNavigator = ({navigation, setLogin}) => (
+  <Stack.Navigator initialRouteName="Welcome" mode="modal">
+
+    <Stack.Screen options={{headerTitleStyle: {alignSelf: "center"}, headerShown: false}} 
+    name="Welcome" component={WelcomeScreen} />
+
+    <Stack.Screen name="Login" options={{ title: 'Login' }}> 
+    {(props) => <LoginScreen {...props} setLogin={setLogin} />}
+    </Stack.Screen>
+
     <Stack.Screen name="Register" component={Screen}/>
+
   </Stack.Navigator>
 );  
 

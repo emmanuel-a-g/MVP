@@ -1,6 +1,6 @@
 export default {
-  primary : "teal",
-  secondary: "pink",
+  primary : "orange",
+  secondary: "teal",
   black: "#000",
   white: "#fff",
   medium: "#6e6969",

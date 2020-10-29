@@ -7,13 +7,27 @@ import AppTextInput from '../components/AppTextInput';
 import Screen from '../components/Screen';
 import AppButton from './AppButton';
 import AppText from '../components/AppText';
+import { set } from 'react-native-reanimated';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
   password: Yup.string().required().min(4).label('Password'),
 })
 
-function LoginScreen(props) {
+function LoginScreen({setLogin}) {
+  let acceptable = {
+    email: "email@gmail.com",
+    password: "1234", 
+  }
+  const handleSubmit = (values) => {
+    let emailMatch = values.email === acceptable.email;
+    let passwordMatch = values.password === acceptable.password;
+    if (emailMatch && passwordMatch) {
+      setLogin()
+    } else {
+      alert('Sorry, wrong combo!');
+    }
+  }
 
   return (
     <Screen style={styles.container}>
@@ -23,7 +37,7 @@ function LoginScreen(props) {
 
       <Formik
       initialValues={{email: '', password: ''}}
-      onSubmit={(values) => console.log(values, '<--values')}
+      onSubmit={(values) => handleSubmit(values)}
       validationSchema={validationSchema}
       > 
         { ( {handleChange, handleSubmit, values, errors, setFieldTouched, touched} ) => (
