@@ -21,6 +21,7 @@ function AddMessageScreen({user, count}) {
     axios.post('http://192.168.1.235:9000/chats', textObj)
     .then((res) => {
       console.log('sucess posting');
+      alert('posted!');
     })
     .catch((err) => {
       console.log('err post:', err);

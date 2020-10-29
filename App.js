@@ -17,19 +17,15 @@ import AuthNavigator from './app/navigation/AuthNavigator';
 import AccountScreen from './app/screens/AccountScreen';
 import { set } from 'react-native-reanimated';
 import navigationTheme from './app/navigation/navigationTheme';
-// <AuthNavigator/>
-// <AppNavigator/>
-
 
 export default function App() {
   const [login, loginSet] = useState(false); //set to false right now
   const [user, setUser] = useState('');
   const [count, setCount ] = useState(0);
-  
+
   const setLogin = ({user}) => {
     if (!login) {
       loginSet(true);
-      console.log('setting user id to', user);
       setUser(user);
     } else {
       loginSet(false);

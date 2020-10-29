@@ -12,7 +12,7 @@ let initialMessages = [{
     title: 'T1', 
     description: "M1",
     messageid: 0,
-    image: require('../assets/somebody.jpg'),
+    image: ' ',
   }
 ];
 
@@ -23,12 +23,12 @@ function MessagesScreen({returnCount}) {
   useEffect(() => {
     getChatsFunc();
   },  []);
+
   const getChatsFunc = () => {
     axios.get('http://192.168.1.235:9000/chats')
     .then((response) => {
       setMessages(response.data);
       let totalTexts = response.data.length;
-      console.log(totalTexts)
       returnCount(totalTexts);
     })
     .catch((error) => {
@@ -38,8 +38,8 @@ function MessagesScreen({returnCount}) {
 
 const handleDelete = (message) => {
     //delete message here, then call server to delete from database
-    let filteredMessages = messages.filter((mess) => mess.messageid !== message.messageid);
-    setMessages(filteredMessages);
+    setMessages(messages.filter((mess) => mess.messageid !== message.messageid));
+    console.log(message.messageid, 'message id');
     axios.delete(`http://192.168.1.235:9000/chats/${message.messageid}`)
     .then((res) => {
       console.log('deleted');

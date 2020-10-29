@@ -29,6 +29,7 @@ const people = {
 }
 
 function AccountScreen({setLogin, user}) {
+  console.log(user);
   // const [theuser, setUser] = useState({id: 0, title: 'User', image: require('../assets/somebody.jpg')});
   
   // const determineUser = () => {
@@ -47,15 +48,24 @@ function AccountScreen({setLogin, user}) {
   // useEffect(() => {
   //   determineUser();
   // }, []);
+  const deterimeImage = () => {
+    if (user.id === '3' ) {
+      return require('../assets/somebodyThree.jpg');
+    } else if (user.id === '1') {
+      return require('../assets/somebody.jpg');
+    } else {
+      return require('../assets/somebodyTwo.jpg');
+    }
+  }
 
   return (
     <Screen style={styles.screen}>
 
     <View style={styles.container}>
     <ListItem 
-      title={"Pitbull"}
-      subtitle={"2email@gmail.com"}
-      image={require('../assets/somebodyThree.jpg')}
+      title={user.title}
+      subtitle={user.email}
+      image={deterimeImage()}
     />
     <ListItem />
     </View>
