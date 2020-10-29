@@ -15,18 +15,39 @@ const validationSchema = Yup.object().shape({
 })
 
 function LoginScreen({setLogin}) {
-  let acceptable = {
-    email: "email@gmail.com",
-    password: "1234", 
-  }
+  let acceptable = [
+    {email: "email@gmail.com", //marcos 1
+     password: "1234",
+     id: "1",
+     title: 'Marcos Casas',
+     image: "marcos",
+    },
+    {email: "1email@gmail.com", //enrique 2
+    password: "1234",
+    id: "2",
+    title: 'Enrique Iglesias',
+    image: "enrique"
+    },
+    {email: "2email@gmail.com", //pitbull 3
+    password: "1234",
+    id: "3",
+    title: 'Pitbull',
+    image: "pitbull",
+    },
+  ]
+
   const handleSubmit = (values) => {
-    let emailMatch = values.email === acceptable.email;
-    let passwordMatch = values.password === acceptable.password;
-    if (emailMatch && passwordMatch) {
-      setLogin()
-    } else {
-      alert('Sorry, wrong combo!');
+    let id = null;
+    let email = values.email;
+    let pw = values.password;
+    for (let x = 0; x < acceptable.length; x++) {
+      if (acceptable[x]["email"] === email && acceptable[x]["password"] === pw) {
+        // id = acceptable[x]["id"];
+        setLogin({"user": acceptable[x]});
+        return;
+      }
     }
+    alert('sorry wrong combo, try again!');
   }
 
   return (

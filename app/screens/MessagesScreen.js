@@ -5,58 +5,76 @@ import ListItem from '../components/ListItem';
 import Screen from '../components/Screen';
 import ListItemSeperator from  '../components/ListItemSeperator';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
-import getChats from '../api/chats';
+import axios from 'axios';
 
 let initialMessages = [{
     id: 1,
     title: 'T1', 
     description: "M1",
+    messageid: 0,
     image: require('../assets/somebody.jpg'),
   }
 ];
 
-
-function MessagesScreen(props) {
+function MessagesScreen({returnCount}) {
   const [messages, setMessages] = useState(initialMessages);
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-
+    getChatsFunc();
   },  []);
-  const getChatsFunc = async () => {
-    const response = await getChats();
-    setMessages(response.data);
+  const getChatsFunc = () => {
+    axios.get('http://192.168.1.235:9000/chats')
+    .then((response) => {
+      setMessages(response.data);
+      let totalTexts = response.data.length;
+      console.log(totalTexts)
+      returnCount(totalTexts);
+    })
+    .catch((error) => {
+      console.log('error:', error);
+    })
   }
 
-  const handleDelete = (message) => {
-    //delete message and call server to delete from database
-    let filteredMessages = messages.filter((mess) => mess.id !== message.id);
+const handleDelete = (message) => {
+    //delete message here, then call server to delete from database
+    let filteredMessages = messages.filter((mess) => mess.messageid !== message.messageid);
     setMessages(filteredMessages);
+    axios.delete(`http://192.168.1.235:9000/chats/${message.messageid}`)
+    .then((res) => {
+      console.log('deleted');
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  };
+  const determineImage = (id) => {
+    if (id === '1') {
+      return require('../assets/somebody.jpg');
+    } else if (id === '2') {
+      return require('../assets/somebodyTwo.jpg');
+    } else {
+      return require('../assets/somebodyThree.jpg');
+    }
   };
 
   return (
     <Screen>
       <FlatList
       data={messages}
-      keyExtractor={ (message) => message.id.toString()}
+      keyExtractor={ (message) => message.messageid.toString()}
       renderItem={({item}) => 
       <ListItem title={item.title}
       subtitle={item.description}
-      image={item.id === 1 ? 
-      require('../assets/somebody.jpg') : require('../assets/somebodyTwo.jpg')}
-      onPress={() => console.log('pressed', item)}
+      image={determineImage(item.id)}
+      onPress={() => console.log('pressed')}
       renderRightActions={() => 
         <ListItemDeleteAction onPress={() => handleDelete(item)}/>}
       /> }
       ItemSeparatorComponent={ListItemSeperator}
       refreshing={refreshing}
       onRefresh={() => {
-        setMessages([{
-          id: 2,
-          title: "T2",
-          description: "D2",
-          image: require('../assets/somebody.jpg'),
-        }])
+        getChatsFunc()
       }}
       />
 
