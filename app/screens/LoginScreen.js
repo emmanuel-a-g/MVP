@@ -69,7 +69,7 @@ function LoginScreen({setLogin}) {
           icon="email"
           multiline={false}
           keyboardType="email-address"
-          onBlur={() => setFieldTouched("email")}
+          onBlur={() => setFieldTouched("email")} 
           placeholder="Email"
           onChangeText={handleChange("email")}
           value={values.email}

@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import AppTextInput from '../components/AppTextInput';
 import Screen from '../components/Screen';
@@ -20,7 +20,7 @@ function AddMessageScreen({user, count}) {
     };
     axios.post('http://192.168.1.235:9000/chats', textObj)
     .then((res) => {
-      console.log('sucess posting');
+      console.log('sucess posting message');
       alert('posted!');
     })
     .catch((err) => {
@@ -32,9 +32,12 @@ function AddMessageScreen({user, count}) {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={() => console.log('dismissed')}>
     <Screen style={{padding: 20}}>
     
+
     <View style={styles.container}><Text style={styles.text}>Post to the Chat</Text></View>
+    
     <AppTextInput 
     icon="message" 
     multiline={true} 
@@ -43,13 +46,14 @@ function AddMessageScreen({user, count}) {
     value= {input}
     onChangeText={(text) => setInput(text)}
     />
-
-    <View style={styles.container}></View>
-    <Button  title="post" color={colors.primary} 
-    onPress={() => {console.log(input); postToServer();}}>
-    </Button>
-      
-    </Screen>
+    
+        <View style={styles.container}></View>
+        <Button  title="post" color={colors.primary} 
+        onPress={() => {console.log(input); postToServer();}}>
+        </Button>
+        
+        </Screen>
+  </TouchableWithoutFeedback>
   );
 }
 const styles = StyleSheet.create({
